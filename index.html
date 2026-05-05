@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solve the Business — TranZact AI Hackathon 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#06080a;--surface:#0d1117;--surface2:#161b22;--border:#21262d;--border2:#30363d;--green:#00d4aa;--green2:#00ffcc;--purple:#7c3aed;--purple2:#a78bfa;--orange:#f59e0b;--red:#ef4444;--blue:#3b82f6;--pink:#ec4899;--text:#e6edf3;--text2:#8b949e;--text3:#484f58}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+.page{max-width:860px;margin:0 auto;padding:0 2rem 4rem}
+
+/* ===== HERO ===== */
+.hero{text-align:center;padding:5rem 2rem 4rem;position:relative}
+.hero::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,0.08) 0%,rgba(0,212,170,0.04) 40%,transparent 70%);pointer-events:none}
+.badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:700;color:var(--green);background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.2);border-radius:20px;padding:6px 16px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero h1{font-size:3.2rem;font-weight:900;line-height:1.1;margin-bottom:1rem}
+.hero h1 .gr1{background:linear-gradient(135deg,var(--green),var(--green2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 .gr2{background:linear-gradient(135deg,var(--purple),var(--purple2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:1.15rem;color:var(--text2);max-width:580px;margin:0 auto 2rem;line-height:1.8}
+.hero-sub strong{color:var(--text)}
+.hero-stats{display:flex;justify-content:center;gap:3rem;margin-top:2.5rem}
+.stat{text-align:center}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:800;color:var(--green)}
+.stat-lbl{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px}
+
+/* ===== SECTIONS ===== */
+.section{padding:3rem 0;border-top:1px solid var(--border)}
+.section-tag{font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:var(--purple2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.5rem}
+.section h2{font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:0.5rem}
+.section-intro{font-size:0.95rem;color:var(--text2);margin-bottom:1.5rem;max-width:650px}
+.section h3{font-size:1rem;font-weight:700;color:var(--text2);margin:2rem 0 0.8rem;text-transform:uppercase;letter-spacing:0.05em;font-size:0.85rem}
+
+/* ===== WHY THIS MATTERS (narrative block) ===== */
+.narrative{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2rem 2.2rem;margin:1.5rem 0;position:relative;overflow:hidden}
+.narrative::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--green),var(--purple))}
+.narrative p{font-size:0.95rem;color:var(--text2);margin-bottom:1rem;line-height:1.8}
+.narrative p:last-child{margin-bottom:0}
+.narrative strong{color:var(--text)}
+.narrative em{color:var(--green);font-style:normal;font-weight:600}
+
+/* ===== CARDS ===== */
+.card-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:1rem 0}
+.card-grid.two-col{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;transition:all 0.2s}
+.card:hover{border-color:var(--border2);transform:translateY(-1px)}
+.card-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:var(--purple2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.card p{font-size:0.9rem;color:var(--text2);line-height:1.6}
+.card .difficulty{display:inline-block;font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-top:8px;letter-spacing:0.05em}
+.diff-easy{background:rgba(0,212,170,0.1);color:var(--green)}
+.diff-med{background:rgba(245,158,11,0.1);color:var(--orange)}
+.diff-hard{background:rgba(239,68,68,0.1);color:var(--red)}
+
+/* ===== TEAM CARDS ===== */
+.team-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.8rem;margin:1rem 0;position:relative;overflow:hidden}
+.team-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.team-green::before{background:linear-gradient(90deg,var(--green),#00e6b8)}
+.team-purple::before{background:linear-gradient(90deg,var(--purple),var(--purple2))}
+.team-orange::before{background:linear-gradient(90deg,var(--orange),#fbbf24)}
+.team-pink::before{background:linear-gradient(90deg,var(--pink),#f472b6)}
+.team-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem}
+.team-name{font-size:1.1rem;font-weight:800;color:#fff}
+.team-count{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text3);background:var(--surface2);padding:3px 10px;border-radius:6px}
+.team-depts{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--green);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.8rem}
+.team-members{display:flex;flex-wrap:wrap;gap:6px}
+.member-chip{font-size:0.78rem;color:var(--text2);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px}
+.team-motto{font-size:0.8rem;color:var(--text3);font-style:italic;margin-top:1rem;padding-top:0.8rem;border-top:1px solid var(--border)}
+
+/* ===== TABLE ===== */
+.score-table{width:100%;border-collapse:separate;border-spacing:0;margin:1rem 0;font-size:0.85rem;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.score-table th{text-align:left;padding:0.9rem 1.2rem;background:var(--surface2);color:var(--green);font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em}
+.score-table td{padding:0.9rem 1.2rem;border-top:1px solid var(--border);color:var(--text2)}
+.score-table tr:hover td{background:var(--surface)}
+.weight{font-family:'JetBrains Mono',monospace;color:var(--purple2);font-weight:700}
+.bar{display:inline-block;height:6px;border-radius:3px;background:var(--purple);margin-right:8px;vertical-align:middle}
+
+/* ===== TIMELINE ===== */
+.timeline{position:relative;margin:1.5rem 0;padding-left:2rem}
+.timeline::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--green),var(--purple),var(--orange))}
+.tl-item{position:relative;padding:0.8rem 0 1.2rem 1.5rem}
+.tl-item::before{content:"";position:absolute;left:-1.55rem;top:1rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--green)}
+.tl-item:nth-child(2)::before{border-color:var(--blue)}
+.tl-item:nth-child(3)::before{border-color:var(--purple)}
+.tl-item:nth-child(4)::before{border-color:var(--orange)}
+.tl-day{font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.1em}
+.tl-item:nth-child(2) .tl-day{color:var(--blue)}
+.tl-item:nth-child(3) .tl-day{color:var(--purple)}
+.tl-item:nth-child(4) .tl-day{color:var(--orange)}
+.tl-desc{font-size:0.9rem;color:var(--text);font-weight:600;margin-top:2px}
+.tl-sub{font-size:0.8rem;color:var(--text3);margin-top:2px}
+
+/* ===== AWARDS ===== */
+.award-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:1rem 0}
+.award{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;text-align:center;transition:all 0.2s}
+.award:hover{border-color:var(--border2)}
+.award-emoji{font-size:1.8rem;margin-bottom:6px}
+.award-name{font-size:0.85rem;font-weight:700;color:#fff}
+.award-desc{font-size:0.72rem;color:var(--text3);margin-top:3px}
+
+/* ===== RULES ===== */
+.rule{display:flex;gap:1rem;margin:1rem 0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;align-items:flex-start}
+.rule-icon{font-size:1.8rem;flex-shrink:0}
+.rule-title{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:2px}
+.rule-desc{font-size:0.85rem;color:var(--text2)}
+
+/* ===== LISTS ===== */
+ul{list-style:none;padding:0}
+ul li{padding:0.4rem 0;padding-left:1.4rem;position:relative;font-size:0.9rem;color:var(--text2)}
+ul li::before{content:">";font-family:'JetBrains Mono',monospace;position:absolute;left:0;color:var(--green);font-weight:700;font-size:0.8rem}
+
+/* ===== QUOTE ===== */
+.quote-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2.5rem 2.5rem;margin:2rem 0;text-align:center;position:relative}
+.quote-block::before{content:open-quote;font-size:4rem;color:var(--border2);position:absolute;top:0.5rem;left:1.5rem;font-family:Georgia,serif}
+.quote-text{font-size:1.2rem;font-weight:600;color:#fff;line-height:1.6;max-width:550px;margin:0 auto 1rem}
+.quote-text em{color:var(--green);font-style:normal}
+.quote-attr{font-size:0.75rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em}
+
+/* ===== FOOTER ===== */
+.footer{text-align:center;padding:3rem 0 1rem;border-top:1px solid var(--border);margin-top:1rem}
+.footer-big{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:0.5rem}
+.footer-sub{font-size:0.85rem;color:var(--text3)}
+.footer-logo{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text3);margin-top:2rem;letter-spacing:0.15em;text-transform:uppercase}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  .hero h1{font-size:2.2rem}
+  .hero-stats{gap:1.5rem}
+  .card-grid.two-col{grid-template-columns:1fr}
+  .award-grid{grid-template-columns:1fr}
+  .page{padding:0 1.2rem 3rem}
+}
+
+/* ===== PRINT ===== */
+@media print{
+  body{background:#fff;color:#111}
+  .page{padding:1rem}
+  .hero::before{display:none}
+  .hero h1 .gr1,.hero h1 .gr2{-webkit-text-fill-color:#111;background:none}
+  .badge{color:#333;border-color:#ccc;background:#f5f5f5}
+  .narrative,.card,.team-card,.rule,.award,.quote-block{background:#f9f9f9;border-color:#ddd}
+  .narrative::before,.team-card::before{display:none}
+  .section{border-top-color:#eee}
+  .section-tag,.card-label,.tl-day,.team-depts{color:#333}
+  .score-table th{background:#f0f0f0;color:#111;border-color:#ddd}
+  .score-table td,.score-table{border-color:#eee}
+  .member-chip{background:#eee;border-color:#ddd;color:#333}
+  .timeline::before{background:#ccc}
+  .tl-item::before{border-color:#999}
+  ul li::before{color:#333}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══════════ HERO ═══════════ -->
+<div class="hero">
+  <div class="badge">TranZact AI Hackathon 2026</div>
+  <h1><span class="gr1">Solve</span> the <span class="gr2">Business</span></h1>
+  <p class="hero-sub">
+    Every day your team works around problems that AI could fix in seconds.
+    This hackathon isn't about impressing anyone — it's about <strong>building something
+    your team will actually use on Monday morning.</strong>
+  </p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">42</div><div class="stat-lbl">Builders</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">Teams</div></div>
+    <div class="stat"><div class="stat-num">7</div><div class="stat-lbl">Days</div></div>
+    <div class="stat"><div class="stat-num">1</div><div class="stat-lbl">Rule</div></div>
+  </div>
+</div>
+
+<!-- ═══════════ WHY THIS MATTERS ═══════════ -->
+<div class="section">
+  <div class="section-tag">00 — The Why</div>
+  <h2>Let's be honest for a second.</h2>
+  <div class="narrative">
+    <p>Most hackathons end with cool demos that never see production. Slides get clapped at. Prototypes get forgotten. Everyone goes back to doing things the old way.</p>
+    <p><strong>Not this one.</strong></p>
+    <p>This hackathon has one filter: <em>Would you actually use this next week?</em></p>
+    <p>We're not looking for the fanciest AI model or the most buzzword-heavy pitch. We want the tool that makes Prem's Monday easier. The bot that saves Suneet's team 3 hours of repetitive work. The system that helps Adarsh's reps know exactly who to call next.</p>
+    <p><strong>If it doesn't solve a real problem for a real person at TranZact, it doesn't count.</strong></p>
+  </div>
+</div>
+
+<!-- ═══════════ THE ONE RULE ═══════════ -->
+<div class="section">
+  <div class="section-tag">01 — The One Rule</div>
+  <h2>Ship it or sponsor the Samosa party.</h2>
+  <p class="section-intro">Every team must submit a working prototype. Not a slide deck. Not a "we ran out of time." A thing that runs. If your team doesn't submit — or submits a duplicate — you're buying Samosa and Vada Pav for the entire company. No exceptions. No mercy. 🍟</p>
+
+  <div class="rule">
+    <div class="rule-icon">🚫</div>
+    <div>
+      <div class="rule-title">Leaders are Judges, Not Players</div>
+      <div class="rule-desc">Mudit, Harikesh, Atul, Shabib, Adarsh, Sharad & Rohan — you're on the judging panel. Your job is to evaluate, challenge, and pick winners. No sneaking in with a "small contribution."</div>
+    </div>
+  </div>
+
+  <div class="rule">
+    <div class="rule-icon">🎤</div>
+    <div>
+      <div class="rule-title">Finals at All Hands</div>
+      <div class="rule-desc">Every team demos live. 3 minutes. No slides allowed during demo — show the thing running. 2 minutes of Q&A from judges. The entire company watches. This is your stage.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ PROBLEM STATEMENTS ═══════════ -->
+<div class="section">
+  <div class="section-tag">02 — Pick Your Battle</div>
+  <h2>Problem statements to get you started.</h2>
+  <p class="section-intro">These are suggestions, not requirements. If your team has a burning problem that isn't listed here — go for it. The wildcard category exists for a reason. The best ideas usually come from the people closest to the problem.</p>
+
+  <h3>💰 Sales & Revenue</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Lead Autopilot</div>
+      <p>Build an AI that takes inbound leads and auto-qualifies them — no human touches the lead until it's ready to close.</p>
+      <span class="difficulty diff-hard">HARD</span>
+    </div>
+    <div class="card">
+      <div class="card-label">The "Call This Person Now" System</div>
+      <p>An AI that looks at your pipeline and tells each rep: who to call, when, and exactly what to say based on deal history.</p>
+      <span class="difficulty diff-med">MEDIUM</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Win-Rate Proposal Generator</div>
+      <p>Feed it your past winning deals → it generates proposals that match the winning patterns. Stop writing from scratch.</p>
+      <span class="difficulty diff-med">MEDIUM</span>
+    </div>
+  </div>
+
+  <h3>🤝 CX & Support</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Ticket Killer</div>
+      <p>An AI bot that handles 30% of repetitive customer queries without any human involvement. Measure the actual deflection rate.</p>
+      <span class="difficulty diff-hard">HARD</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Call → Action</div>
+      <p>Auto-summarize every customer call into: what happened, what the customer needs, and what you should do next. No more "let me check my notes."</p>
+      <span class="difficulty diff-med">MEDIUM</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Churn Radar</div>
+      <p>Predict which customers are about to leave before they tell you — based on usage patterns, ticket frequency, and sentiment.</p>
+      <span class="difficulty diff-hard">HARD</span>
+    </div>
+  </div>
+
+  <h3>⚙️ Product & Internal Ops</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">"Ask TranZact" Bot</div>
+      <p>One AI that knows everything — product docs, SOPs, policies, HR stuff. Ask it anything, get an answer instantly. No more "let me find the right person."</p>
+      <span class="difficulty diff-med">MEDIUM</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Meeting Assassin</div>
+      <p>Meeting ends → AI generates action items → auto-assigns them to the right people → tracks completion. Kill the "what did we decide?" problem forever.</p>
+      <span class="difficulty diff-easy">STARTER-FRIENDLY</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Day 1 AI Buddy</div>
+      <p>An onboarding assistant for new employees AND new customers. Guides them through setup, answers FAQs, and flags when someone is stuck.</p>
+      <span class="difficulty diff-easy">STARTER-FRIENDLY</span>
+    </div>
+  </div>
+
+  <h3>🔥 Wildcard</h3>
+  <div class="card-grid">
+    <div class="card" style="border-color:var(--purple);background:rgba(124,58,237,0.05)">
+      <div class="card-label" style="color:var(--orange)">Surprise Everyone</div>
+      <p>Build something nobody asked for — but once they see it, they'll wonder how we ever lived without it. The best companies are built on ideas that seemed crazy until they worked.</p>
+      <span class="difficulty diff-med">???</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ THE TEAMS ═══════════ -->
+<div class="section">
+  <div class="section-tag">03 — The Squads</div>
+  <h2>Your teams. Randomized. Cross-functional. No hiding.</h2>
+  <p class="section-intro">We deliberately mixed departments so every team has builders, sellers, and people who talk to customers daily. The best solutions come from diverse perspectives, not echo chambers.</p>
+
+  <div class="team-card team-green">
+    <div class="team-header">
+      <div class="team-name">🐉 Team Dracarys</div>
+      <div class="team-count">11 members</div>
+    </div>
+    <div class="team-depts">CX + Channel + Engineering + Product + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Sakshi Goyal</span>
+      <span class="member-chip">Pranit Jadhav</span>
+      <span class="member-chip">Leonard Jojy</span>
+      <span class="member-chip">Anoop S Kumar</span>
+      <span class="member-chip">Meet Yadav</span>
+      <span class="member-chip">Deveshi Dwivedi</span>
+      <span class="member-chip">Gaurav Yerunkar</span>
+      <span class="member-chip">Dolly Kadukar</span>
+      <span class="member-chip">Vivian</span>
+      <span class="member-chip">Mansi Garg</span>
+      <span class="member-chip">Himanshu Jain</span>
+    </div>
+    <div class="team-motto">"We don't pitch ideas. We ship weapons."</div>
+  </div>
+
+  <div class="team-card team-purple">
+    <div class="team-header">
+      <div class="team-name">⚡ Team Voltage</div>
+      <div class="team-count">11 members</div>
+    </div>
+    <div class="team-depts">CX + Channel + Engineering + Growth + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Varun Ashok</span>
+      <span class="member-chip">Neeraj Prasad Singh</span>
+      <span class="member-chip">Shobna Gunder</span>
+      <span class="member-chip">Faizal Mahmood</span>
+      <span class="member-chip">Shishir Raj</span>
+      <span class="member-chip">Harshit Gupta</span>
+      <span class="member-chip">Sumanth Gowda</span>
+      <span class="member-chip">Krushna Belapurkar</span>
+      <span class="member-chip">Abhas Maheshwari</span>
+      <span class="member-chip">Suneet Choudhary</span>
+      <span class="member-chip">Koushik Narendar</span>
+    </div>
+    <div class="team-motto">"Less talk, more deploy."</div>
+  </div>
+
+  <div class="team-card team-orange">
+    <div class="team-header">
+      <div class="team-name">🔥 Team Inferno</div>
+      <div class="team-count">10 members</div>
+    </div>
+    <div class="team-depts">CX + Channel + Engineering + Growth + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Jeet Popat</span>
+      <span class="member-chip">Vrushank Timbadia</span>
+      <span class="member-chip">Pratik Mahajan</span>
+      <span class="member-chip">Divya Jyothi</span>
+      <span class="member-chip">Shubham Singh</span>
+      <span class="member-chip">Prem Jadhav</span>
+      <span class="member-chip">Sanket Patel</span>
+      <span class="member-chip">Saurabh Agarwal</span>
+      <span class="member-chip">Abhishek Tiwari</span>
+      <span class="member-chip">Himanshu Mishra</span>
+    </div>
+    <div class="team-motto">"If it ain't burning, we're not trying hard enough."</div>
+  </div>
+
+  <div class="team-card team-pink">
+    <div class="team-header">
+      <div class="team-name">🎯 Team Sniper</div>
+      <div class="team-count">10 members</div>
+    </div>
+    <div class="team-depts">CX + Channel + Engineering + Finance + Product + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Amruta Tivarekar</span>
+      <span class="member-chip">Bhakti Karkera</span>
+      <span class="member-chip">Ali Akbar Sayyad</span>
+      <span class="member-chip">Shreyas Katake</span>
+      <span class="member-chip">Shailesh Jaiswal</span>
+      <span class="member-chip">Shagun Deora</span>
+      <span class="member-chip">Mudit Mehta</span>
+      <span class="member-chip">Aatif</span>
+      <span class="member-chip">Ankit Pandey</span>
+      <span class="member-chip">Zack</span>
+    </div>
+    <div class="team-motto">"One shot. One solution. No wasted motion."</div>
+  </div>
+</div>
+
+<!-- ═══════════ SCORING ═══════════ -->
+<div class="section">
+  <div class="section-tag">04 — How You'll Be Judged</div>
+  <h2>We're not grading your code. We're grading your thinking.</h2>
+  <p class="section-intro">A beautiful UI with no business value scores lower than an ugly spreadsheet that saves 10 hours a week. Prioritize impact over polish.</p>
+
+  <table class="score-table">
+    <thead>
+      <tr><th>Criteria</th><th>The Real Question</th><th>Weight</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>💼 Business Impact</td><td>If we shipped this tomorrow, would anyone's life actually change?</td><td class="weight"><span class="bar" style="width:60px"></span>30%</td></tr>
+      <tr><td>🚀 Execution</td><td>Does it work? Can you click through it? Or is this a "imagine if" presentation?</td><td class="weight"><span class="bar" style="width:40px"></span>20%</td></tr>
+      <tr><td>⚡ Simplicity</td><td>Could a non-technical person at TranZact actually use this?</td><td class="weight"><span class="bar" style="width:40px"></span>20%</td></tr>
+      <tr><td>🧠 AI Usage</td><td>Is AI the right tool here — or did you just sprinkle ChatGPT on top to look smart?</td><td class="weight"><span class="bar" style="width:30px"></span>15%</td></tr>
+      <tr><td>🎤 Demo Quality</td><td>Did you make us feel it? Did we lean forward or check our phones?</td><td class="weight"><span class="bar" style="width:30px"></span>15%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════ DEMO DAY ═══════════ -->
+<div class="section">
+  <div class="section-tag">05 — Demo Day</div>
+  <h2>3 minutes. No slides. Just the thing running.</h2>
+
+  <div class="rule">
+    <div class="rule-icon">⏱</div>
+    <div>
+      <div class="rule-title">3-Minute Demo</div>
+      <div class="rule-desc">Show the product. Walk through a real use case. The timer is strict — when it buzzes, you stop. This forces clarity. If you can't explain it in 3 minutes, you don't understand it well enough.</div>
+    </div>
+  </div>
+
+  <div class="rule">
+    <div class="rule-icon">❓</div>
+    <div>
+      <div class="rule-title">2-Minute Grilling</div>
+      <div class="rule-desc">Judges will ask hard questions. "What happens when X?" "How does this scale?" "Who would actually use this daily?" Be ready to defend your choices.</div>
+    </div>
+  </div>
+
+  <div class="rule">
+    <div class="rule-icon">📱</div>
+    <div>
+      <div class="rule-title">Live Crowd Reactions</div>
+      <div class="rule-desc">The audience votes in real-time: 🔥 (want this now), 😴 (wake me up when it's over), 💰 (this will make us money). Crowd Favorite is a real award.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ AWARDS ═══════════ -->
+<div class="section">
+  <div class="section-tag">06 — Awards</div>
+  <h2>Glory, bragging rights, and maybe a trophy.</h2>
+
+  <div class="award-grid">
+    <div class="award">
+      <div class="award-emoji">🏆</div>
+      <div class="award-name">"Built for Impact"</div>
+      <div class="award-desc">The overall winner. Highest total score.</div>
+    </div>
+    <div class="award">
+      <div class="award-emoji">🚀</div>
+      <div class="award-name">"Most Likely to Ship"</div>
+      <div class="award-desc">The one leadership actually wants to deploy.</div>
+    </div>
+    <div class="award">
+      <div class="award-emoji">🧪</div>
+      <div class="award-name">"AI Jugaad of the Year"</div>
+      <div class="award-desc">Scrappy, clever, and it just works.</div>
+    </div>
+    <div class="award">
+      <div class="award-emoji">🤯</div>
+      <div class="award-name">"Why Didn't We Build This Earlier?"</div>
+      <div class="award-desc">The solution to a problem we've ignored too long.</div>
+    </div>
+    <div class="award">
+      <div class="award-emoji">😂</div>
+      <div class="award-name">"Over-Engineering Award"</div>
+      <div class="award-desc">You built a rocket to cross the street. Impressive, but why?</div>
+    </div>
+    <div class="award">
+      <div class="award-emoji">🏅</div>
+      <div class="award-name">Crowd Favorite</div>
+      <div class="award-desc">The people's choice. Most 🔥 reactions wins.</div>
+    </div>
+  </div>
+
+  <div class="narrative" style="margin-top:1.5rem">
+    <p><strong>The "Ship It" Bonus:</strong> If your hackathon project actually gets implemented into TranZact's workflow after the event — you get an <em>additional reward</em> and a shoutout from leadership. This isn't just a one-day thing. Build something worth keeping.</p>
+  </div>
+</div>
+
+<!-- ═══════════ TIMELINE ═══════════ -->
+<div class="section">
+  <div class="section-tag">07 — Timeline</div>
+  <h2>7 days. No extensions. No excuses.</h2>
+  <p class="section-intro">Constraints breed creativity. You have one week to go from "what should we build?" to "here's the thing running." That's tight — and that's the point.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-day">Day 0 — Launch</div>
+      <div class="tl-desc">Teams announced. Pick your problem. Start talking.</div>
+      <div class="tl-sub">Meet your team, brainstorm, agree on the problem you're solving. Don't start building yet — align first.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-day">Day 1–5 — Build Sprint</div>
+      <div class="tl-desc">Heads down. Build the thing.</div>
+      <div class="tl-sub">Use #ai-hackathon-help on Slack if you're stuck. Mentors are available. No-code tools are encouraged — speed > elegance.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-day">Day 6 — Submission</div>
+      <div class="tl-desc">Lock it in. Submit your working prototype.</div>
+      <div class="tl-sub">Record a backup video in case of demo-day tech gremlins. Submit by end of day — late = Samosa penalty.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-day">Day 7 — Demo @ All Hands</div>
+      <div class="tl-desc">Show. Don't tell. Win.</div>
+      <div class="tl-sub">3 min demo + 2 min Q&A per team. Live crowd voting. Awards announced same day.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ MENTORSHIP ═══════════ -->
+<div class="section">
+  <div class="section-tag">08 — Support</div>
+  <h2>You're not alone in this.</h2>
+  <p class="section-intro">We want you to succeed. If you're stuck on an API, confused about a use case, or just need someone to bounce ideas off — reach out.</p>
+  <ul>
+    <li><strong>Slack:</strong> #ai-hackathon-help — post anything, no question is dumb</li>
+    <li><strong>Mentors:</strong> Product, Tech, and CX mentors available for 1-on-1 guidance</li>
+    <li><strong>Office Hours:</strong> Optional drop-in sessions during the build sprint</li>
+    <li><strong>AI Tools:</strong> Use ChatGPT, Claude, Cursor, Replit, Lovable — whatever gets you to a working demo fastest</li>
+  </ul>
+</div>
+
+<!-- ═══════════ REAL TALK ═══════════ -->
+<div class="section">
+  <div class="section-tag">09 — Real Talk</div>
+  <h2>Advice from the people who've seen hackathons fail.</h2>
+
+  <div class="narrative">
+    <p><strong>Start with the person, not the technology.</strong> Don't ask "what can AI do?" Ask "what's the most annoying part of Vivian's day?" or "why does Himanshu Jain's team lose deals?" The best AI tools are invisible — they just make the pain go away.</p>
+    <p><strong>Prototype ugly. Ship fast.</strong> Nobody cares if your UI looks like it was designed in 2004 — if it solves a real problem, it wins. A Google Sheet connected to an API is a valid prototype. A WhatsApp bot that actually works beats a beautiful dashboard that doesn't.</p>
+    <p><strong>Don't force AI where it doesn't belong.</strong> If the best solution is a simple automation without any AI, that's fine. We're scoring business impact, not how many times you say "machine learning" in your demo.</p>
+    <p><strong>Talk to your users during the build.</strong> If you're building for CX, go sit with the CX team for 30 minutes. Watch them work. Ask what's broken. The insight you get from watching > the insight you get from assuming.</p>
+  </div>
+</div>
+
+<!-- ═══════════ CLOSING QUOTE ═══════════ -->
+<div class="section" style="border-top:none;padding-top:1rem">
+  <div class="quote-block">
+    <div class="quote-text">Don't build the smartest AI.<br>Build the one we'll <em>actually use on Monday.</em></div>
+    <div class="quote-attr">The only brief that matters</div>
+  </div>
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<div class="footer">
+  <div class="footer-big">Start thinking. Start forming teams. Let's ship. 🚀</div>
+  <div class="footer-sub">42 builders. 4 teams. 7 days. One question: What will you build?</div>
+  <div class="footer-logo">TranZact — Solve the Business — 2026</div>
+</div>
+
+</div>
+</body>
+</html>
