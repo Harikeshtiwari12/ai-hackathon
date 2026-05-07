@@ -55,6 +55,22 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 /* ===== WEEK CARDS ===== */
 .week-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.8rem;margin:1rem 0;position:relative;overflow:hidden}
 .week-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+/* ===== TEAM CARDS ===== */
+.team-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.8rem;margin:1rem 0;position:relative;overflow:hidden}
+.team-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.tm-green::before{background:linear-gradient(90deg,var(--green),#00e6b8)}
+.tm-blue::before{background:linear-gradient(90deg,var(--blue),#60a5fa)}
+.tm-purple::before{background:linear-gradient(90deg,var(--purple),var(--purple2))}
+.tm-orange::before{background:linear-gradient(90deg,var(--orange),#fbbf24)}
+.tm-pink::before{background:linear-gradient(90deg,var(--pink),#f472b6)}
+.tm-cyan::before{background:linear-gradient(90deg,#06b6d4,#22d3ee)}
+.team-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
+.team-name{font-size:1.1rem;font-weight:800;color:#fff}
+.team-count{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text3);background:var(--surface2);padding:3px 10px;border-radius:6px}
+.team-depts{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--green);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.8rem}
+.team-members{display:flex;flex-wrap:wrap;gap:6px}
+.member-chip{font-size:0.78rem;color:var(--text2);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px}
+
 .wk-green::before{background:linear-gradient(90deg,var(--green),#00e6b8)}
 .wk-blue::before{background:linear-gradient(90deg,var(--blue),#60a5fa)}
 .wk-purple::before{background:linear-gradient(90deg,var(--purple),var(--purple2))}
@@ -121,8 +137,9 @@ ul li::before{content:">";font-family:'JetBrains Mono',monospace;position:absolu
   .hero::before{display:none}
   .hero h1 .gr1,.hero h1 .gr2{-webkit-text-fill-color:#111;background:none}
   .badge{color:#333;border-color:#ccc;background:#f5f5f5}
-  .narrative,.card,.week-card,.rule,.quote-block,.cta-box{background:#f9f9f9;border-color:#ddd}
-  .narrative::before,.week-card::before{display:none}
+  .narrative,.card,.week-card,.team-card,.rule,.quote-block,.cta-box{background:#f9f9f9;border-color:#ddd}
+  .narrative::before,.week-card::before,.team-card::before{display:none}
+  .member-chip{background:#eee;border-color:#ddd;color:#333}
   .section{border-top-color:#eee}
   .section-tag,.card-label,.week-theme{color:#333}
   .score-table th{background:#f0f0f0;color:#111;border-color:#ddd}
@@ -146,9 +163,9 @@ ul li::before{content:">";font-family:'JetBrains Mono',monospace;position:absolu
   </p>
   <div class="hero-stats">
     <div class="stat"><div class="stat-num">42</div><div class="stat-lbl">Participants</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-lbl">Squads</div></div>
     <div class="stat"><div class="stat-num">30</div><div class="stat-lbl">Days</div></div>
     <div class="stat"><div class="stat-num">10</div><div class="stat-lbl">Min/Day</div></div>
-    <div class="stat"><div class="stat-num">$0</div><div class="stat-lbl">Cost</div></div>
   </div>
 </div>
 
@@ -367,42 +384,115 @@ ul li::before{content:">";font-family:'JetBrains Mono',monospace;position:absolu
   <div class="rule">
     <div class="rule-icon">👥</div>
     <div>
-      <div class="rule-title">Buddy System</div>
-      <div class="rule-desc">You've been paired with someone from a different department. Check in with each other daily. "Did you do your 10 minutes?" It's easier to stay consistent when someone's watching. See your pair below.</div>
+      <div class="rule-title">Learning Squads</div>
+      <div class="rule-desc">You've been placed in a 7-person cross-functional squad. These are your people for the next 30 days — share wins, help each other when stuck, and hold each other accountable. One daily check-in: "Did you do your 10 minutes?"</div>
     </div>
   </div>
 
-  <h3 style="margin-top:1.5rem;margin-bottom:0.5rem;font-size:0.9rem;color:#fff;text-transform:none;letter-spacing:0">🤝 Your Buddy Pairs</h3>
-  <p class="section-intro" style="margin-bottom:1rem">Cross-functional by design — every pair mixes departments so you learn how AI applies beyond your own role.</p>
+  <h3 style="margin-top:1.5rem;margin-bottom:0.5rem;font-size:0.9rem;color:#fff;text-transform:none;letter-spacing:0">🤝 Your 6 Squads</h3>
+  <p class="section-intro" style="margin-bottom:1rem">Cross-functional by design — every squad mixes departments so you learn how AI applies beyond your own role.</p>
 
-  <table class="score-table">
-    <thead>
-      <tr><th>#</th><th>Buddy A</th><th>Buddy B</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>1</td><td>Bhakti Karkera <span style="color:var(--text3);font-size:0.75rem">(Engineering)</span></td><td>Meet Yadav <span style="color:var(--text3);font-size:0.75rem">(CX)</span></td></tr>
-      <tr><td>2</td><td>Neeraj Prasad Singh <span style="color:var(--text3);font-size:0.75rem">(Engineering)</span></td><td>Gaurav Yerunkar <span style="color:var(--text3);font-size:0.75rem">(CX)</span></td></tr>
-      <tr><td>3</td><td>Himanshu Mishra <span style="color:var(--text3);font-size:0.75rem">(Engineering)</span></td><td>Shishir Raj <span style="color:var(--text3);font-size:0.75rem">(CX)</span></td></tr>
-      <tr><td>4</td><td>Harshit Gupta <span style="color:var(--text3);font-size:0.75rem">(Engineering)</span></td><td>Krushna Belapurkar <span style="color:var(--text3);font-size:0.75rem">(CX)</span></td></tr>
-      <tr><td>5</td><td>Deveshi Dwivedi <span style="color:var(--text3);font-size:0.75rem">(Engineering)</span></td><td>Saurabh Agarwal <span style="color:var(--text3);font-size:0.75rem">(Channel)</span></td></tr>
-      <tr><td>6</td><td>Shailesh Jaiswal <span style="color:var(--text3);font-size:0.75rem">(Product)</span></td><td>Varun Ashok <span style="color:var(--text3);font-size:0.75rem">(Channel)</span></td></tr>
-      <tr><td>7</td><td>Mansi Garg <span style="color:var(--text3);font-size:0.75rem">(Product)</span></td><td>Shagun Deora <span style="color:var(--text3);font-size:0.75rem">(CX)</span></td></tr>
-      <tr><td>8</td><td>Faizal Mahmood <span style="color:var(--text3);font-size:0.75rem">(Engineering)</span></td><td>Himanshu Jain <span style="color:var(--text3);font-size:0.75rem">(Sales)</span></td></tr>
-      <tr><td>9</td><td>Shreyas Katake <span style="color:var(--text3);font-size:0.75rem">(Engineering)</span></td><td>Koushik Narendar <span style="color:var(--text3);font-size:0.75rem">(Growth)</span></td></tr>
-      <tr><td>10</td><td>Suneet Choudhary <span style="color:var(--text3);font-size:0.75rem">(Engineering)</span></td><td>Ankit Pandey <span style="color:var(--text3);font-size:0.75rem">(Sales)</span></td></tr>
-      <tr><td>11</td><td>Pratik Mahajan <span style="color:var(--text3);font-size:0.75rem">(Engineering)</span></td><td>Zack <span style="color:var(--text3);font-size:0.75rem">(Channel)</span></td></tr>
-      <tr><td>12</td><td>Sanket Patel <span style="color:var(--text3);font-size:0.75rem">(Engineering)</span></td><td>Abhas Maheshwari <span style="color:var(--text3);font-size:0.75rem">(Sales)</span></td></tr>
-      <tr><td>13</td><td>Amruta Tivarekar <span style="color:var(--text3);font-size:0.75rem">(Engineering)</span></td><td>Sakshi Goyal <span style="color:var(--text3);font-size:0.75rem">(Sales)</span></td></tr>
-      <tr><td>14</td><td>Sumanth Gowda <span style="color:var(--text3);font-size:0.75rem">(Engineering)</span></td><td>Aatif <span style="color:var(--text3);font-size:0.75rem">(Channel)</span></td></tr>
-      <tr><td>15</td><td>Pranit Jadhav <span style="color:var(--text3);font-size:0.75rem">(CX)</span></td><td>Abhishek Tiwari <span style="color:var(--text3);font-size:0.75rem">(Sales)</span></td></tr>
-      <tr><td>16</td><td>Shobna Gunder <span style="color:var(--text3);font-size:0.75rem">(CX)</span></td><td>Leonard Jojy <span style="color:var(--text3);font-size:0.75rem">(Channel)</span></td></tr>
-      <tr><td>17</td><td>Jeet Popat <span style="color:var(--text3);font-size:0.75rem">(Sales)</span></td><td>Vivian <span style="color:var(--text3);font-size:0.75rem">(CX)</span></td></tr>
-      <tr><td>18</td><td>Divya Jyothi <span style="color:var(--text3);font-size:0.75rem">(Sales)</span></td><td>Anoop S Kumar <span style="color:var(--text3);font-size:0.75rem">(CX)</span></td></tr>
-      <tr><td>19</td><td>Shubham Singh <span style="color:var(--text3);font-size:0.75rem">(CX)</span></td><td>Prem Jadhav <span style="color:var(--text3);font-size:0.75rem">(CX)</span></td></tr>
-      <tr><td>20</td><td>Mudit Mehta <span style="color:var(--text3);font-size:0.75rem">(Finance)</span></td><td>Ali Akbar Sayyad <span style="color:var(--text3);font-size:0.75rem">(Sales)</span></td></tr>
-      <tr><td>21</td><td>Dolly Kadukar <span style="color:var(--text3);font-size:0.75rem">(CX)</span></td><td>Vrushank Timbadia <span style="color:var(--text3);font-size:0.75rem">(Growth)</span></td></tr>
-    </tbody>
-  </table>
+  <div class="team-card tm-green">
+    <div class="team-header">
+      <div class="team-name">⚡ Squad Spark</div>
+      <div class="team-count">7 members</div>
+    </div>
+    <div class="team-depts">CX + Channel + Engineering + Product + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Sumanth Gowda</span>
+      <span class="member-chip">Leonard Jojy</span>
+      <span class="member-chip">Shailesh Jaiswal</span>
+      <span class="member-chip">Varun Ashok</span>
+      <span class="member-chip">Abhishek Tiwari</span>
+      <span class="member-chip">Vivian</span>
+      <span class="member-chip">Himanshu Jain</span>
+    </div>
+  </div>
+
+  <div class="team-card tm-blue">
+    <div class="team-header">
+      <div class="team-name">💜 Squad Pulse</div>
+      <div class="team-count">7 members</div>
+    </div>
+    <div class="team-depts">CX + Channel + Engineering + Growth + Product + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Himanshu Mishra</span>
+      <span class="member-chip">Shishir Raj</span>
+      <span class="member-chip">Mansi Garg</span>
+      <span class="member-chip">Koushik Narendar</span>
+      <span class="member-chip">Abhas Maheshwari</span>
+      <span class="member-chip">Saurabh Agarwal</span>
+      <span class="member-chip">Vrushank Timbadia</span>
+    </div>
+  </div>
+
+  <div class="team-card tm-purple">
+    <div class="team-header">
+      <div class="team-name">🌟 Squad Nova</div>
+      <div class="team-count">7 members</div>
+    </div>
+    <div class="team-depts">CX + Engineering + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Shubham Singh</span>
+      <span class="member-chip">Deveshi Dwivedi</span>
+      <span class="member-chip">Meet Yadav</span>
+      <span class="member-chip">Jeet Popat</span>
+      <span class="member-chip">Shobna Gunder</span>
+      <span class="member-chip">Sakshi Goyal</span>
+      <span class="member-chip">Suneet Choudhary</span>
+    </div>
+  </div>
+
+  <div class="team-card tm-orange">
+    <div class="team-header">
+      <div class="team-name">🔄 Squad Flux</div>
+      <div class="team-count">7 members</div>
+    </div>
+    <div class="team-depts">CX + Engineering + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Prem Jadhav</span>
+      <span class="member-chip">Pratik Mahajan</span>
+      <span class="member-chip">Dolly Kadukar</span>
+      <span class="member-chip">Bhakti Karkera</span>
+      <span class="member-chip">Amruta Tivarekar</span>
+      <span class="member-chip">Shagun Deora</span>
+      <span class="member-chip">Divya Jyothi</span>
+    </div>
+  </div>
+
+  <div class="team-card tm-pink">
+    <div class="team-header">
+      <div class="team-name">🔥 Squad Bolt</div>
+      <div class="team-count">7 members</div>
+    </div>
+    <div class="team-depts">CX + Engineering + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Shreyas Katake</span>
+      <span class="member-chip">Ali Akbar Sayyad</span>
+      <span class="member-chip">Anoop S Kumar</span>
+      <span class="member-chip">Pranit Jadhav</span>
+      <span class="member-chip">Krushna Belapurkar</span>
+      <span class="member-chip">Gaurav Yerunkar</span>
+      <span class="member-chip">Harshit Gupta</span>
+    </div>
+  </div>
+
+  <div class="team-card tm-cyan">
+    <div class="team-header">
+      <div class="team-name">🎯 Squad Apex</div>
+      <div class="team-count">7 members</div>
+    </div>
+    <div class="team-depts">Channel + Engineering + Finance + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Faizal Mahmood</span>
+      <span class="member-chip">Zack</span>
+      <span class="member-chip">Aatif</span>
+      <span class="member-chip">Mudit Mehta</span>
+      <span class="member-chip">Ankit Pandey</span>
+      <span class="member-chip">Neeraj Prasad Singh</span>
+      <span class="member-chip">Sanket Patel</span>
+    </div>
+  </div>
 
   <div class="rule">
     <div class="rule-icon">🎤</div>
